@@ -1,0 +1,15 @@
+*.pkl
+similarity.pkl
+similarity_dict.pkl
+movie_data.pkl
+movie_list_dict.pkl
+movie_list.pkl
+
+*.csv
+__pycache__/
+*.ipynb_checkpoints
+.DS_Store
+*.pyc
+.env
+.idea/
+.vscode/

@@ -2,16 +2,20 @@ import pickle
 import streamlit as st
 import requests
 import os
-import gdown
+import urllib.request
 
-def download_from_drive(file_id, file_name):
+# --- Download required files if not already present ---
+def download_from_url(url, file_name):
     if not os.path.exists(file_name):
-        url = f"https://drive.google.com/uc?id={file_id}"
-        gdown.download(url, file_name, quiet=False)
+        urllib.request.urlretrieve(url, file_name)
 
-# --- Download required .pkl files from Google Drive if not present ---
-download_from_drive("1TW6Q46eR14h7bVKio3wx5W28W9HTkkqy", "movie_list.pkl")
-download_from_drive("1cXNkzNtoO0YtVkm3QuS4PHTg3z-5dZ9o", "similarity.pkl")  # Change this ID with your actual one if needed
+# GitHub (movie_list.pkl)
+github_url = "https://raw.githubusercontent.com/Vivek7987/Movie-Recommendations-System/main/movie_list.pkl"
+download_from_url(github_url, "movie_list.pkl")
+
+# Hugging Face (similarity.pkl)
+huggingface_url = "https://huggingface.co/Vivek798/movie-data/resolve/main/similarity.pkl"
+download_from_url(huggingface_url, "similarity.pkl")
 
 # --- Load the pickle files ---
 movies = pickle.load(open("movie_list.pkl", "rb"))
